@@ -45,13 +45,12 @@ public class BusWayController {
             if (fromStation == null || toStation == null)
                 throw new StationNotFoundException();
             // TODO: Implement this method
-            tripService.getAvailableTrips(fromStation, toStation);
+            mainView.setAvailableTrips(tripService.getAvailableTrips(fromStation, toStation));
 
         } catch (StationNotFoundException e) {
             JOptionPane.showMessageDialog(mainView, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
 
 
 

@@ -1,14 +1,16 @@
 package ma.fstm.ilisi.busway.view;
 
 import ma.fstm.ilisi.busway.controller.BusWayController;
+import ma.fstm.ilisi.busway.model.Trip;
 
 import javax.swing.*;
-import java.awt.*;
+import java.util.List;
 
 public class Main extends JFrame {
-    private BusPanel busPanel;
-    private BusListPanel busListPanel;
-    BusWayController busWayController;
+    private final BusPanel busPanel;
+    private final BusListPanel busListPanel;
+    private final TripPanel tripPanel;
+    private final TripListPanel tripListPanel;
 
     public Main(BusWayController busWayController) {
         setTitle("BusWay");
@@ -16,9 +18,10 @@ public class Main extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        this.busWayController = busWayController;
-        busPanel = new BusPanel();
-        busListPanel = new BusListPanel();
+        this.busPanel = new BusPanel();
+        this.busListPanel = new BusListPanel();
+        this.tripPanel = new TripPanel();
+        this.tripListPanel = new TripListPanel();
 
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
@@ -59,14 +62,17 @@ public class Main extends JFrame {
         menuBar.add(tripMenu);
         JMenuItem addTripMenuItem = new JMenuItem("Add trip");
         addTripMenuItem.addActionListener(e -> {
-            setContentPane(new TripPanel());
+            setContentPane(tripPanel);
             revalidate();
             repaint();
         });
         tripMenu.add(addTripMenuItem);
-        JMenuItem listTripMenuItem = new JMenuItem("List trips");
+        JMenuItem listTripMenuItem = new JMenuItem("Show available trips");
         listTripMenuItem.addActionListener(e -> {
-            // setContentPane(new TripListPanel());
+            setContentPane(tripListPanel);
+            tripListPanel.getSearchButton().addActionListener(e1 -> {
+                busWayController.showAvailableTrips(tripListPanel.getFromField().getText(), tripListPanel.getToField().getText());
+            });
             revalidate();
             repaint();
         });
@@ -79,5 +85,9 @@ public class Main extends JFrame {
 
     public BusListPanel getBusListPanel() {
         return busListPanel;
+    }
+
+    public void setAvailableTrips(List<Trip> data) {
+        tripListPanel.setTableData(data);
     }
 }

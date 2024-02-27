@@ -1,7 +1,6 @@
 package ma.fstm.ilisi.busway.model;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.*;
 
 public class Trip {
@@ -105,15 +104,6 @@ public class Trip {
 	public boolean isAvailable(Station from, Station to) {
 		if (startStation.getStation().equals(from))
 			return reservations.size() < bus.getCapacity();
-		// TODO: Implement this method
-
-		return false;
-	}
-
-	public boolean isAvailable(Station from, Station to, int number) {
-		if (startStation.getStation().equals(from))
-			return reservations.size() < bus.getCapacity();
-
 		// TODO: Implement this method
 
 		return false;
