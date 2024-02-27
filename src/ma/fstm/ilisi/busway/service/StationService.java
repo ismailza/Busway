@@ -20,6 +20,15 @@ public class StationService {
         return stations;
     }
 
+    public Station getStationByName(String name) {
+        for (Station station : stations) {
+            if (station.getName().equals(name)) {
+                return station;
+            }
+        }
+        return null;
+    }
+
     public void setupStations() {
         Station station1 = new Station("Station 1", "Address 1");
         Station station2 = new Station("Station 2", "Address 2");

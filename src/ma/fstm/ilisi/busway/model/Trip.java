@@ -103,6 +103,10 @@ public class Trip {
 	}
 
 	public boolean isAvailable(Station from, Station to) {
+		if (startStation.getStation().equals(from))
+			return reservations.size() < bus.getCapacity();
+		// TODO: Implement this method
+
 		return false;
 	}
 
@@ -110,17 +114,17 @@ public class Trip {
 		if (startStation.getStation().equals(from))
 			return reservations.size() < bus.getCapacity();
 
-		int count = 0;
-		LocalTime startTime, arriveTime;
+		// TODO: Implement this method
 
-			for (StopStation stopStation : stopStations) {
-				if (stopStation.getStation().equals(from))
-					startTime = stopStation.getTime();
-				if (stopStation.getStation().equals(to))
-					arriveTime = stopStation.getTime();
-			}
-		for (Reservation reservation : reservations) {
+		return false;
+	}
 
+	public boolean passByStation(Station station) {
+		if (startStation.getStation().equals(station) || endStation.getStation().equals(station))
+			return true;
+		for (StopStation stopStation : stopStations) {
+			if (stopStation.getStation().equals(station))
+				return true;
 		}
 		return false;
 	}
