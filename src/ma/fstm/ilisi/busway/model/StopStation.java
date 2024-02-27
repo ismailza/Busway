@@ -5,12 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StopStation {
+    private Station station;
     private LocalTime time;
     private List<Trip> trips;
 
-    public StopStation(LocalTime time) {
+    public StopStation(Station station, LocalTime time) {
+        this.station = station;
         this.time = time;
         this.trips = new ArrayList<>();
+    }
+
+    public Station getStation() {
+        return station;
     }
 
     public LocalTime getTime() {
@@ -21,6 +27,10 @@ public class StopStation {
         return trips;
     }
 
+    public void setStation(Station station) {
+        this.station = station;
+    }
+
     public void setTime(LocalTime time) {
         this.time = time;
     }
@@ -28,4 +38,5 @@ public class StopStation {
     public void addTrip(Trip trip) {
         this.trips.add(trip);
     }
+
 }

@@ -1,6 +1,7 @@
 package ma.fstm.ilisi.busway.model;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 public class Trip {
@@ -77,10 +78,6 @@ public class Trip {
 		this.tarif = tarif;
 	}
 
-	public boolean isAvailable(Station from, Station to) {
-		return false;
-	}
-
 	public void setBus(Bus bus) {
 		this.bus = bus;
 	}
@@ -104,4 +101,29 @@ public class Trip {
 	public void addStopStation(StopStation stopStation) {
 		this.stopStations.add(stopStation);
 	}
+
+	public boolean isAvailable(Station from, Station to) {
+		return false;
+	}
+
+	public boolean isAvailable(Station from, Station to, int number) {
+		if (startStation.getStation().equals(from))
+			return reservations.size() < bus.getCapacity();
+
+		int count = 0;
+		LocalTime startTime, arriveTime;
+
+			for (StopStation stopStation : stopStations) {
+				if (stopStation.getStation().equals(from))
+					startTime = stopStation.getTime();
+				if (stopStation.getStation().equals(to))
+					arriveTime = stopStation.getTime();
+			}
+		for (Reservation reservation : reservations) {
+
+		}
+		return false;
+	}
+
+
 }

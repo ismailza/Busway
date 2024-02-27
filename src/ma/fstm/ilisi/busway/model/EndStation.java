@@ -5,12 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EndStation {
+    private Station station;
     private LocalTime time;
     private List<Trip> trips;
 
-    public EndStation(LocalTime time) {
+    public EndStation(Station station, LocalTime time) {
+        this.station = station;
         this.time = time;
         this.trips = new ArrayList<>();
+    }
+
+    public Station getStation() {
+        return station;
     }
 
     public LocalTime getTime() {
@@ -19,6 +25,10 @@ public class EndStation {
 
     public List<Trip> getTrips() {
         return trips;
+    }
+
+    public void setStation(Station station) {
+        this.station = station;
     }
 
     public void setTime(LocalTime time) {

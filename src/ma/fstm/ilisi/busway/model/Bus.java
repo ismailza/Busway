@@ -37,4 +37,9 @@ public class Bus {
 	public void addTrip(Trip trip) {
 		this.trips.add(trip);
 	}
+
+	@Override
+	public String toString() {
+		return "busNumber=" + busNumber + ", capacity=" + capacity;
+	}
 }
