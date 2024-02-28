@@ -1,4 +1,4 @@
-package ma.fstm.ilisi.busway.model;
+package ma.fstm.ilisi.busway.bo;
 
 import java.time.LocalDateTime;
 

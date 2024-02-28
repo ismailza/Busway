@@ -1,6 +1,6 @@
 package ma.fstm.ilisi.busway.service;
 
-import ma.fstm.ilisi.busway.model.Bus;
+import ma.fstm.ilisi.busway.bo.Bus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,15 @@ public class BusService {
 
     public List<Bus> getBuses() {
         return buses;
+    }
+
+    public Bus getBusByNumber(int busNumber) {
+        for (Bus bus : buses) {
+            if (bus.getBusNumber() == busNumber) {
+                return bus;
+            }
+        }
+        return null;
     }
 
     public void setupBuses() {

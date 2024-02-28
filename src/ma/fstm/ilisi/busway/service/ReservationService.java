@@ -1,7 +1,6 @@
 package ma.fstm.ilisi.busway.service;
 
-import ma.fstm.ilisi.busway.model.Reservation;
-import ma.fstm.ilisi.busway.model.Trip;
+import ma.fstm.ilisi.busway.bo.Reservation;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

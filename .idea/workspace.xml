@@ -7,13 +7,23 @@
     <list default="true" id="a1b3f969-d9e2-46f9-b63f-a55c2339fabf" name="Changes" comment="controller">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/controller/BusWayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/controller/BusWayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/Bus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/Bus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/Driver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/EndStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/EndStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/StartStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/StartStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/StopStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/StopStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/Trip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/Trip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/Bus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/bo/Bus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/bo/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/EndStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/bo/EndStation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/Passenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/bo/Passenger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/bo/Reservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/StartStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/bo/StartStation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/Station.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/bo/Station.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/StopStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/bo/StopStation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/Trip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/bo/Trip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/service/BusService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/service/BusService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/service/ReservationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/service/StationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/service/StationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/service/TripService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/service/TripService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/view/BusListPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/view/BusListPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/view/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/view/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/view/TripListPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/view/TripListPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/view/TripPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/view/TripPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +65,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
@@ -80,7 +91,8 @@
       <workItem from="1708853899933" duration="6260000" />
       <workItem from="1708951279576" duration="3361000" />
       <workItem from="1709062440993" duration="2776000" />
-      <workItem from="1709065271477" duration="7059000" />
+      <workItem from="1709065271477" duration="10909000" />
+      <workItem from="1709108985226" duration="4145000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />

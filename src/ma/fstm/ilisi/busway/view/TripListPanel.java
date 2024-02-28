@@ -1,6 +1,6 @@
 package ma.fstm.ilisi.busway.view;
 
-import ma.fstm.ilisi.busway.model.Trip;
+import ma.fstm.ilisi.busway.bo.Trip;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

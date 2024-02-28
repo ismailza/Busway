@@ -9,6 +9,5 @@ public class TripPanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(new JLabel("Ajouter Voyage"));
 
-
     }
 }
