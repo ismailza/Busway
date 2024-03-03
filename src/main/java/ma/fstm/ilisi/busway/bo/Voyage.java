@@ -131,7 +131,7 @@ public class Voyage {
             }
         }
         // If departure station is not found or its departure time is before current time
-        if (heureDepart == null || LocalTime.now().isBefore(heureDepart))
+        if (heureDepart == null || LocalTime.now().isAfter(heureDepart))
             return false;
         // Check if the arrival station is reachable after the departure
         if (this.arrivee.equals(stationArrivee))
