@@ -111,4 +111,43 @@ public class Voyage {
         this.reservations.add(reservation);
     }
 
+    /**
+     * estDisponible: verifier si le voyage est disponible pour être réservé
+     * @param stationDepart La station de départ de passager
+     * @param stationArrivee La station d'arrivee de passager
+     * @return true si le voyage est disponible, false sinon
+     */
+    public boolean estDisponible(Station stationDepart, Station stationArrivee) {
+        boolean departTrouve = false;
+        LocalTime heureDepart = null;
+
+        if (this.depart.equals(stationDepart)) {
+            departTrouve = true;
+            heureDepart = this.heureDepart;
+            if (heureDepart.isAfter(LocalTime.now()))
+                return false;
+        } else {
+            for (Arrete arrete : arretes) {
+                if (arrete.getStation().equals(stationDepart)) {
+                    departTrouve = true;
+                    heureDepart = arrete.getHeureArrete();
+                    if (heureDepart.isAfter(LocalTime.now()))
+                        return false;
+                    break;
+                }
+            }
+        }
+
+        if (departTrouve) {
+            if (this.arrivee.equals(stationArrivee))
+                return true;
+            for (Arrete arrete : arretes) {
+                if (arrete.getStation().equals(stationArrivee))
+                    return arrete.getHeureArrete().isAfter(heureDepart);
+            }
+        }
+
+        return false;
+    }
+
 }

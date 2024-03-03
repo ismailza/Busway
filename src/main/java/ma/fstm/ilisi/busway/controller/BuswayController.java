@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 public class BuswayController extends HttpServlet {
     private BusService busService;
@@ -36,11 +37,40 @@ public class BuswayController extends HttpServlet {
                 req.getRequestDispatcher("installInfoBus.jsp").forward(req, resp);
             }
         }
+        switch (req.getServletPath()) {
+            case "/search" -> {
+                req.getRequestDispatcher("availableBus.jsp").forward(req, resp);
+            }
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        switch (req.getServletPath()) {
+            case "/search" -> {
+                String depart = req.getParameter("depart");
+                String arrivee = req.getParameter("arrivee");
+                List<Voyage> voyagesDisponibles = this.consulterVoyagesDisponibles(depart, arrivee);
+                if (voyagesDisponibles == null)
+                    req.setAttribute("danger", "Une ou plusieurs stations spécifiées sont introuvables.");
+                else
+                    req.setAttribute("results", voyagesDisponibles);
+                req.getRequestDispatcher("availableBus.jsp").forward(req, resp);
+            }
+        }
+    }
 
+    /**
+     * Consulter les voyages disponibles
+     * @param depart La station de départ
+     * @param arrivee La station d'arrivée
+     */
+    public List<Voyage> consulterVoyagesDisponibles(String depart, String arrivee) {
+        Station stationDepart = this.stationService.findByName(depart);
+        Station stationArrivee = this.stationService.findByName(arrivee);
+        if (stationDepart == null || stationArrivee == null)
+            return null;
+        return this.voyageService.trouverVoyagesDisponibles(stationDepart, stationArrivee);
     }
 
     /**
@@ -83,5 +113,6 @@ public class BuswayController extends HttpServlet {
         arretes.put("Station 4", LocalTime.of(7, 45));
         this.installerInfosBusway(1, 80, 6, "Ismail", "ZAHIR", LocalTime.of(7,0), LocalTime.of(8,0), "Station 1", "Station 5", arretes);
     }
+
 
 }
