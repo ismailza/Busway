@@ -17,5 +17,13 @@ public class VoyageService {
         voyages.add(voyage);
     }
 
+    public List<Voyage> trouverVoyagesDisponibles(Station depart, Station arrivee) {
+        List<Voyage> voyagesDisponibles = new ArrayList<>();
+        for (Voyage voyage : voyages) {
+            if (voyage.estDisponible(depart, arrivee))
+                voyagesDisponibles.add(voyage);
+        }
+        return voyagesDisponibles;
+    }
 
 }
