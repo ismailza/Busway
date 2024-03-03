@@ -118,36 +118,57 @@ public class Voyage {
      * @return true si le voyage est disponible, false sinon
      */
     public boolean estDisponible(Station stationDepart, Station stationArrivee) {
-        boolean departTrouve = false;
         LocalTime heureDepart = null;
 
         if (this.depart.equals(stationDepart)) {
-            departTrouve = true;
             heureDepart = this.heureDepart;
-            if (heureDepart.isAfter(LocalTime.now()))
-                return false;
         } else {
             for (Arrete arrete : arretes) {
                 if (arrete.getStation().equals(stationDepart)) {
-                    departTrouve = true;
                     heureDepart = arrete.getHeureArrete();
-                    if (heureDepart.isAfter(LocalTime.now()))
-                        return false;
                     break;
                 }
             }
         }
-
-        if (departTrouve) {
-            if (this.arrivee.equals(stationArrivee))
-                return true;
-            for (Arrete arrete : arretes) {
-                if (arrete.getStation().equals(stationArrivee))
-                    return arrete.getHeureArrete().isAfter(heureDepart);
-            }
+        // If departure station is not found or its departure time is before current time
+        if (heureDepart == null || LocalTime.now().isBefore(heureDepart))
+            return false;
+        // Check if the arrival station is reachable after the departure
+        if (this.arrivee.equals(stationArrivee))
+            return this.getNombreReservations(stationDepart, stationArrivee) < this.bus.getPlacesLimite();
+        for (Arrete arrete : arretes) {
+            if (arrete.getStation().equals(stationArrivee))
+                return arrete.getHeureArrete().isAfter(heureDepart) &&
+                        this.getNombreReservations(stationDepart, stationArrivee) < this.bus.getPlacesLimite();
         }
-
         return false;
     }
+
+    private int getNombreReservations(Station depart, Station arrivee) {
+        int count = 0;
+        int indiceDepart = this.getIndexOfStation(depart);
+        int indiceArrivee = this.getIndexOfStation(arrivee);
+        for (Reservation reservation : reservations) {
+            if ((this.getIndexOfStation(reservation.getDepart()) < indiceArrivee) &&
+                (indiceDepart < this.getIndexOfStation(reservation.getArrivee())))
+                count++;
+        }
+        return count;
+    }
+
+    private int getIndexOfStation(Station station) {
+        if (depart.equals(station))
+            return 0;
+        int index = 1;
+        for (Arrete arrete : arretes) {
+            if (arrete.getStation().equals(station))
+                return index;
+            index++;
+        }
+        if (arrivee.equals(station))
+            return index;
+        return -1;
+    }
+
 
 }
