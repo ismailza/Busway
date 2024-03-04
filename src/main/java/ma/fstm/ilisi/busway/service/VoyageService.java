@@ -17,5 +17,7 @@ public class VoyageService {
         voyages.add(voyage);
     }
 
-
+    public List<Voyage> retreive() {
+        return voyages;
+    }
 }
