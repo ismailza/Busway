@@ -6,24 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a1b3f969-d9e2-46f9-b63f-a55c2339fabf" name="Changes" comment="controller">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/controller/BusWayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/controller/BusWayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/Bus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/bo/Bus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/bo/Driver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/EndStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/bo/EndStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/Passenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/bo/Passenger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/bo/Reservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/StartStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/bo/StartStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/Station.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/bo/Station.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/StopStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/bo/StopStation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/model/Trip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/bo/Trip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/service/BusService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/service/BusService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/service/ReservationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/service/StationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/service/StationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/service/TripService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/service/TripService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/view/BusListPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/view/BusListPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/view/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/view/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/view/TripListPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/view/TripListPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/view/TripPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ma/fstm/ilisi/busway/view/TripPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,25 +34,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.BusWayController.executor": "Run",
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/zahir/Downloads/github-copilot-intellij/lib/github-copilot-intellij-1.4.17.4734.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.BusWayController.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/zahir/Downloads/github-copilot-intellij/lib/github-copilot-intellij-1.4.17.4734.jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

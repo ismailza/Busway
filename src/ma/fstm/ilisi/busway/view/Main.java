@@ -1,5 +1,7 @@
 package ma.fstm.ilisi.busway.view;
 
+
+
 import ma.fstm.ilisi.busway.controller.BusWayController;
 import ma.fstm.ilisi.busway.bo.Trip;
 
