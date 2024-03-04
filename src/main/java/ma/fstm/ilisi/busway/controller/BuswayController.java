@@ -34,10 +34,13 @@ public class BuswayController extends HttpServlet {
         switch (req.getServletPath()) {
             case "/install" -> {
                 req.setAttribute("buses", this.busService.retreive());
+                req.setAttribute("stations", this.stationService.retreive());
                 req.getRequestDispatcher("installInfoBus.jsp").forward(req, resp);
             }
-        }
-        switch (req.getServletPath()) {
+            case "/voyages" -> {
+                req.setAttribute("voyages", this.voyageService.retreive());
+                req.getRequestDispatcher("voyages.jsp").forward(req, resp);
+            }
             case "/search" -> {
                 req.getRequestDispatcher("availableBus.jsp").forward(req, resp);
             }
@@ -57,9 +60,38 @@ public class BuswayController extends HttpServlet {
                     req.setAttribute("results", voyagesDisponibles);
                 req.getRequestDispatcher("availableBus.jsp").forward(req, resp);
             }
+            case "/install" -> {
+                try {
+                    int numBus = Integer.parseInt(req.getParameter("numBus"));
+                    int placesLimite = Integer.parseInt(req.getParameter("placesLimite"));
+
+                    String prenomConducteur = req.getParameter("prenomConducteur");
+                    String nomConducteur = req.getParameter("nomConducteur");
+
+                    float tarif = Float.parseFloat(req.getParameter("tarif"));
+                    LocalTime heureDepart = LocalTime.parse(req.getParameter("heureDepart"));
+                    LocalTime heureArrivee = LocalTime.parse(req.getParameter("heureArrivee"));
+                    String stationDepart = req.getParameter("stationDepart");
+                    String stationArrivee = req.getParameter("stationArrivee");
+
+                    Map<String, String[]> params = req.getParameterMap();
+                    Map<String, LocalTime> arretes = new HashMap<>();
+                    for (int i = 1; params.containsKey("stationsArret[" + i + "][nom]"); i++) {
+                        String nomStation = req.getParameter("stationsArret[" + i + "][nom]");
+                        String heureArret = req.getParameter("stationsArret[" + i + "][heure]");
+                        if (nomStation != null && heureArret != null) {
+                            arretes.put(nomStation, LocalTime.parse(heureArret));
+                        }
+                    }
+                    this.installerInfosBusway(numBus, placesLimite, tarif, prenomConducteur, nomConducteur, heureDepart, heureArrivee, stationDepart, stationArrivee, arretes);
+                    req.getSession().setAttribute("sucess", "Opération effectuée avec succès");
+                } catch (NumberFormatException e) {
+                    req.getSession().setAttribute("danger", "Erreurs dans le format des données!");
+                }
+                resp.sendRedirect(req.getContextPath() + "/voyages");
+            }
         }
     }
-
     /**
      * Consulter les voyages disponibles
      * @param depart La station de départ
@@ -113,6 +145,5 @@ public class BuswayController extends HttpServlet {
         arretes.put("Station 4", LocalTime.of(7, 45));
         this.installerInfosBusway(1, 80, 6, "Ismail", "ZAHIR", LocalTime.of(7,0), LocalTime.of(8,0), "Station 1", "Station 5", arretes);
     }
-
 
 }

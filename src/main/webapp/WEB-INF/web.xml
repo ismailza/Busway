@@ -16,5 +16,6 @@
         <servlet-name>BusController</servlet-name>
         <url-pattern>/install</url-pattern>
         <url-pattern>/search</url-pattern>
+        <url-pattern>/voyages</url-pattern>
     </servlet-mapping>
 </web-app>

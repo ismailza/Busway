@@ -26,4 +26,7 @@ public class VoyageService {
         return voyagesDisponibles;
     }
 
+    public List<Voyage> retreive() {
+        return voyages;
+    }
 }
