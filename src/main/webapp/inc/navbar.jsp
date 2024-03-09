@@ -8,6 +8,7 @@
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href="${pageContext.request.contextPath}/buses" class="nav-link px-2">Bus</a></li>
+        <li><a href="${pageContext.request.contextPath}/stations" class="nav-link px-2">Station</a></li>
         <li><a href="${pageContext.request.contextPath}/conducteurs" class="nav-link px-2">Conducteurs</a></li>
         <li><a href="${pageContext.request.contextPath}/voyages" class="nav-link px-2">Voyages</a></li>
     </ul>
