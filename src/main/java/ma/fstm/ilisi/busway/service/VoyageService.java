@@ -1,32 +1,64 @@
 package ma.fstm.ilisi.busway.service;
 
-import ma.fstm.ilisi.busway.bo.Station;
 import ma.fstm.ilisi.busway.bo.Voyage;
+import ma.fstm.ilisi.busway.dao.VoyageDAO;
+import ma.fstm.ilisi.busway.dto.StationDTO;
+import ma.fstm.ilisi.busway.dto.VoyageDTO;
+import ma.fstm.ilisi.busway.exception.VoyageNotFoundException;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class VoyageService {
-    private static final List<Voyage> voyages;
+public class VoyageService implements VoyageServiceInterface {
+    private VoyageDAO voyageDAO;
 
-    static {
-        voyages = new ArrayList<>();
+    public VoyageService() {
+        this.voyageDAO = new VoyageDAO();
     }
 
-    public void create(Voyage voyage) {
-        voyages.add(voyage);
+    public VoyageService(VoyageDAO voyageDAO) {
+        this.voyageDAO = voyageDAO;
     }
 
-    public List<Voyage> trouverVoyagesDisponibles(Station depart, Station arrivee) {
-        List<Voyage> voyagesDisponibles = new ArrayList<>();
-        for (Voyage voyage : voyages) {
-            if (voyage.estDisponible(depart, arrivee))
-                voyagesDisponibles.add(voyage);
-        }
-        return voyagesDisponibles;
+    @Override
+    public List<VoyageDTO> retreive() {
+        return this.voyageDAO.retreive().stream().map(this::mapToVoyageDTO).collect(Collectors.toList());
     }
 
-    public List<Voyage> retreive() {
-        return voyages;
+    @Override
+    public boolean create(VoyageDTO voyageDTO) {
+        return this.voyageDAO.create(this.mapToVoyage(voyageDTO));
+    }
+
+    @Override
+    public boolean update(VoyageDTO voyageDTO) {
+        return this.voyageDAO.update(this.mapToVoyage(voyageDTO));
+    }
+
+    @Override
+    public boolean delete(VoyageDTO voyageDTO) {
+        return this.voyageDAO.delete(this.mapToVoyage(voyageDTO));
+    }
+
+    @Override
+    public VoyageDTO findById(Long id) throws VoyageNotFoundException {
+        Voyage voyage = this.voyageDAO.findById(id);
+        if (voyage == null)
+            throw new VoyageNotFoundException("Voyage not found!");
+        return this.mapToVoyageDTO(voyage);
+    }
+
+    @Override
+    public Voyage mapToVoyage(VoyageDTO voyageDTO) {
+        return new Voyage();
+    }
+
+    @Override
+    public VoyageDTO mapToVoyageDTO(Voyage voyage) {
+        return new VoyageDTO();
+    }
+
+    public List<VoyageDTO> trouverVoyagesDisponibles(StationDTO depart, StationDTO arrivee) {
+        return null;
     }
 }
