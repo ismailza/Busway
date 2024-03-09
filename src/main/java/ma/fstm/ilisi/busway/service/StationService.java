@@ -1,35 +1,58 @@
 package ma.fstm.ilisi.busway.service;
 
 import ma.fstm.ilisi.busway.bo.Station;
+import ma.fstm.ilisi.busway.dao.StationDAO;
+import ma.fstm.ilisi.busway.dto.StationDTO;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class StationService {
-    private static final List<Station> stations;
+public class StationService implements StationServiceInterface {
+    private StationDAO stationDAO;
 
-    static {
-        stations = new ArrayList<>(List.of(
-                new Station("Station 1"),
-                new Station("Station 2"),
-                new Station("Station 3"),
-                new Station("Station 4"),
-                new Station("Station 5"),
-                new Station("Station 6"),
-                new Station("Station 7"),
-                new Station("Station 8"),
-                new Station("Station 9")
-        ));
+    public StationService(StationDAO stationDAO) {
+        this.stationDAO = stationDAO;
     }
 
-    public Station findByName(String name) {
-        for (Station station : stations)
-            if (station.getNom().equalsIgnoreCase(name))
-                return station;
-        return null;
+    @Override
+    public List<StationDTO> retreive() {
+        return this.stationDAO.retreive().stream().map(this::mapToStationDTO).collect(Collectors.toList());
     }
 
-    public List<Station> retreive() {
-        return stations;
+    @Override
+    public boolean create(StationDTO stationDTO) {
+        return this.stationDAO.create(this.mapToStation(stationDTO));
     }
+
+    @Override
+    public boolean update(StationDTO stationDTO) {
+        return this.stationDAO.update(this.mapToStation(stationDTO));
+    }
+
+    @Override
+    public boolean delete(StationDTO stationDTO) {
+        return this.stationDAO.delete(this.mapToStation(stationDTO));
+    }
+
+    @Override
+    public StationDTO findById(Long id) {
+        return this.mapToStationDTO(this.stationDAO.findById(id));
+    }
+
+    @Override
+    public Station mapToStation(StationDTO stationDTO) {
+        return new Station(
+                stationDTO.getId(),
+                stationDTO.getNom()
+        );
+    }
+
+    @Override
+    public StationDTO mapToStationDTO(Station station) {
+        return new StationDTO(
+                station.getId(),
+                station.getNom()
+        );
+    }
+
 }
