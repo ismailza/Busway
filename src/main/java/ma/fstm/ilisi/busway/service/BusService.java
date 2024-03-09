@@ -1,8 +1,10 @@
 package ma.fstm.ilisi.busway.service;
 
 import ma.fstm.ilisi.busway.bo.Bus;
+import ma.fstm.ilisi.busway.bo.Conducteur;
 import ma.fstm.ilisi.busway.dao.BusDAO;
 import ma.fstm.ilisi.busway.dto.BusDTO;
+import ma.fstm.ilisi.busway.dto.ConducteurDTO;
 import ma.fstm.ilisi.busway.exception.BusNotFoundException;
 
 import java.util.List;
@@ -61,7 +63,8 @@ public class BusService implements BusServiceInterface {
         return new Bus(
                 busDTO.getId(),
                 busDTO.getNumBus(),
-                busDTO.getPlacesLimite()
+                busDTO.getPlacesLimite(),
+                new ConducteurService().mapToConducteur(busDTO.getConducteur())
         );
     }
 
@@ -70,7 +73,8 @@ public class BusService implements BusServiceInterface {
         return new BusDTO(
                 bus.getId(),
                 bus.getNumBus(),
-                bus.getPlacesLimite()
+                bus.getPlacesLimite(),
+                new ConducteurService().mapToConducteurDTO(bus.getConducteur())
         );
     }
 
