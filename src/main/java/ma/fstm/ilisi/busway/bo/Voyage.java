@@ -67,6 +67,14 @@ public class Voyage {
         this.id = id;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public float getTarif() {
         return tarif;
     }
