@@ -1,22 +1,45 @@
 package ma.fstm.ilisi.busway.bo;
 
+import jakarta.persistence.*;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Entity
+@Table(name = "voyages")
 public class Voyage {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private float tarif;
     private LocalTime heureDepart;
     private LocalTime heureArrivee;
+    @ManyToOne
+    @JoinColumn(name = "depart_id")
     private Station depart;
+    @ManyToOne
+    @JoinColumn(name = "arrivee_id")
     private Station arrivee;
+    @ManyToMany
+    @JoinTable(name = "voyage_arrete",
+            joinColumns = @JoinColumn(name = "voyage_id"),
+            inverseJoinColumns = @JoinColumn(name = "arrete_id"))
     private List<Arrete> arretes;
+    @ManyToOne
+    @JoinColumn(name = "bus_id")
     private Bus bus;
+    @OneToMany(mappedBy = "voyage")
     private Set<Reservation> reservations;
 
+    public Voyage() {
+        super();
+    }
+
     public Voyage(float tarif, Bus bus) {
+        this();
         this.tarif = tarif;
         this.bus = bus;
         this.arretes = new ArrayList<>();
@@ -37,6 +60,11 @@ public class Voyage {
         this(tarif, bus, heureDepart, heureArrivee, depart, arrivee);
         this.arretes = arretes;
         this.reservations = new HashSet<>();
+    }
+
+    public Voyage(Long id, float tarif, Bus bus, LocalTime heureDepart, LocalTime heureArrivee, Station depart, Station arrivee, List<Arrete> arretes) {
+        this(tarif, bus, heureDepart, heureArrivee, depart, arrivee, arretes);
+        this.id = id;
     }
 
     public float getTarif() {
