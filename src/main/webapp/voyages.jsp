@@ -3,11 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Busway | Les voyages</title>
+    <title>Busway | Gestion des voyages</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <header>
+    <%@ include file="inc/navbar.jsp" %>
 
 </header>
 <div class="container mt-5">
@@ -24,7 +25,7 @@
             <% session.removeAttribute("danger"); %>
         </div>
     </c:if>
-
+    <a href="${pageContext.request.contextPath}/newVoyage" class="btn btn-primary my-4 float-end">Ajouter un voyage</a>
     <table class="table table-striped table-bordered my-4">
         <thead>
         <th>Station départ</th>
@@ -32,6 +33,7 @@
         <th>Station arrivee</th>
         <th>Heure arrivee</th>
         <th>Tarif</th>
+        <th>Actions</th>
         </thead>
         <tbody>
         <c:forEach items="${voyages}" var="voyage">
@@ -41,6 +43,13 @@
                 <td>${voyage.arrivee.nom}</td>
                 <td>${voyage.heureArrivee}</td>
                 <td>${voyage.tarif} DH</td>
+                <td class="col-2 text-end">
+                    <a href="${pageContext.request.contextPath}/editVoyage?id=${voyage.id}" class="btn btn-sm btn-warning">Modifier</a>
+                    <form action="${pageContext.request.contextPath}/deleteVoyage" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="${voyage.id}" />
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce voyage ?');">Supprimer</button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
