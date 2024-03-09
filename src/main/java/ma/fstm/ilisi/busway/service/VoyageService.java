@@ -1,11 +1,14 @@
 package ma.fstm.ilisi.busway.service;
 
+import ma.fstm.ilisi.busway.bo.Arrete;
 import ma.fstm.ilisi.busway.bo.Voyage;
 import ma.fstm.ilisi.busway.dao.VoyageDAO;
+import ma.fstm.ilisi.busway.dto.ArreteDTO;
 import ma.fstm.ilisi.busway.dto.StationDTO;
 import ma.fstm.ilisi.busway.dto.VoyageDTO;
 import ma.fstm.ilisi.busway.exception.VoyageNotFoundException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,12 +53,44 @@ public class VoyageService implements VoyageServiceInterface {
 
     @Override
     public Voyage mapToVoyage(VoyageDTO voyageDTO) {
-        return new Voyage();
+        return new Voyage(
+                voyageDTO.getId(),
+                voyageDTO.getTarif(),
+                new BusService().mapToBus(voyageDTO.getBus()),
+                voyageDTO.getHeureDepart(),
+                voyageDTO.getHeureArrivee(),
+                new StationService().mapToStation(voyageDTO.getDepart()),
+                new StationService().mapToStation(voyageDTO.getArrivee()),
+                new ArrayList<>(voyageDTO.getArretes().stream().map(this::mapToArrete).collect(Collectors.toList()))
+        );
     }
 
     @Override
     public VoyageDTO mapToVoyageDTO(Voyage voyage) {
-        return new VoyageDTO();
+        return new VoyageDTO(
+                voyage.getId(),
+                voyage.getTarif(),
+                new BusService().mapToBusDTO(voyage.getBus()),
+                voyage.getHeureDepart(),
+                voyage.getHeureArrivee(),
+                new StationService().mapToStationDTO(voyage.getDepart()),
+                new StationService().mapToStationDTO(voyage.getArrivee()),
+                new ArrayList<>(voyage.getArretes().stream().map(this::mapToArreteDTO).collect(Collectors.toList()))
+        );
+    }
+
+    public Arrete mapToArrete(ArreteDTO arreteDTO) {
+        return new Arrete(
+                new StationService().mapToStation(arreteDTO.getStation()),
+                arreteDTO.getHeureArrete()
+        );
+    }
+
+    public ArreteDTO mapToArreteDTO(Arrete arrete) {
+        return new ArreteDTO(
+                new StationService().mapToStationDTO(arrete.getStation()),
+                arrete.getHeureArrete()
+        );
     }
 
     public List<VoyageDTO> trouverVoyagesDisponibles(StationDTO depart, StationDTO arrivee) {
