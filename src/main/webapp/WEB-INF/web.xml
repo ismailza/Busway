@@ -8,14 +8,38 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
-    <servlet>
-        <servlet-name>BusController</servlet-name>
-        <servlet-class>ma.fstm.ilisi.busway.controller.BuswayController</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>BusController</servlet-name>
         <url-pattern>/install</url-pattern>
         <url-pattern>/search</url-pattern>
         <url-pattern>/voyages</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BusController</servlet-name>
+        <servlet-class>ma.fstm.ilisi.busway.controller.BusController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BusController</servlet-name>
+        <url-pattern>/buses</url-pattern>
+        <url-pattern>/newBus</url-pattern>
+        <url-pattern>/editBus</url-pattern>
+        <url-pattern>/saveBus</url-pattern>
+        <url-pattern>/updateBus</url-pattern>
+        <url-pattern>/deleteBus</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ConducteurController</servlet-name>
+        <servlet-class>ma.fstm.ilisi.busway.controller.ConducteurController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConducteurController</servlet-name>
+        <url-pattern>/conducteurs</url-pattern>
+        <url-pattern>/newConducteur</url-pattern>
+        <url-pattern>/editConducteur</url-pattern>
+        <url-pattern>/saveConducteur</url-pattern>
+        <url-pattern>/updateConducteur</url-pattern>
+        <url-pattern>/deleteConducteur</url-pattern>
     </servlet-mapping>
 </web-app>
