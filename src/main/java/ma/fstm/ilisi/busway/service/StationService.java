@@ -3,12 +3,17 @@ package ma.fstm.ilisi.busway.service;
 import ma.fstm.ilisi.busway.bo.Station;
 import ma.fstm.ilisi.busway.dao.StationDAO;
 import ma.fstm.ilisi.busway.dto.StationDTO;
+import ma.fstm.ilisi.busway.exception.StationNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class StationService implements StationServiceInterface {
     private StationDAO stationDAO;
+
+    public StationService() {
+        this.stationDAO = new StationDAO();
+    }
 
     public StationService(StationDAO stationDAO) {
         this.stationDAO = stationDAO;
@@ -35,8 +40,11 @@ public class StationService implements StationServiceInterface {
     }
 
     @Override
-    public StationDTO findById(Long id) {
-        return this.mapToStationDTO(this.stationDAO.findById(id));
+    public StationDTO findById(Long id) throws StationNotFoundException {
+        Station station = this.stationDAO.findById(id);
+        if (station == null)
+            throw new StationNotFoundException("Station not found!");
+        return this.mapToStationDTO(station);
     }
 
     @Override
