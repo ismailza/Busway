@@ -23,7 +23,7 @@ public class Voyage {
     @ManyToOne
     @JoinColumn(name = "arrivee_id")
     private Station arrivee;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "voyage_arrete",
             joinColumns = @JoinColumn(name = "voyage_id"),
             inverseJoinColumns = @JoinColumn(name = "arrete_id"))
