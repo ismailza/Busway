@@ -5,6 +5,6 @@ import ma.fstm.ilisi.busway.dto.StationDTO;
 
 public interface StationServiceInterface extends ServiceInterface<StationDTO> {
     StationDTO findById(Long id);
-    Station mapToBus(StationDTO stationDTO);
-    StationDTO mapToBusDTO(Station station);
+    Station mapToStation(StationDTO stationDTO);
+    StationDTO mapToStationDTO(Station station);
 }
