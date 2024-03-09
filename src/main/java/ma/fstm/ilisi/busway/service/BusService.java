@@ -3,6 +3,7 @@ package ma.fstm.ilisi.busway.service;
 import ma.fstm.ilisi.busway.bo.Bus;
 import ma.fstm.ilisi.busway.dao.BusDAO;
 import ma.fstm.ilisi.busway.dto.BusDTO;
+import ma.fstm.ilisi.busway.exception.BusNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +11,10 @@ import java.util.stream.Collectors;
 public class BusService implements BusServiceInterface {
 
     private BusDAO busDAO;
+
+    public BusService() {
+        this.busDAO = new BusDAO();
+    }
 
     public BusService(BusDAO busDAO) {
         this.busDAO = busDAO;
@@ -36,13 +41,19 @@ public class BusService implements BusServiceInterface {
     }
 
     @Override
-    public BusDTO findById(Long id) {
-        return this.mapToBusDTO(this.busDAO.findById(id));
+    public BusDTO findById(Long id) throws BusNotFoundException {
+        Bus bus = this.busDAO.findById(id);
+        if (bus == null)
+            throw new BusNotFoundException("Bus not found!");
+        return this.mapToBusDTO(bus);
     }
 
     @Override
-    public BusDTO findByBusNum(int numBus) {
-        return this.mapToBusDTO(this.busDAO.findByBusNum(numBus));
+    public BusDTO findByBusNum(int numBus) throws BusNotFoundException {
+        Bus bus = this.busDAO.findByBusNum(numBus);
+        if (bus == null)
+            throw new BusNotFoundException("Bus not found!");
+        return this.mapToBusDTO(bus);
     }
 
     @Override
