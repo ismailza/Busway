@@ -16,7 +16,6 @@ import ma.fstm.ilisi.busway.service.VoyageService;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +30,10 @@ public class VoyageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         switch (req.getServletPath()) {
+            case "/" -> {
+                req.setAttribute("stations", new StationService().retreive());
+                req.getRequestDispatcher("index.jsp").forward(req, resp);
+            }
             case "/voyages" -> {
                 req.setAttribute("voyages", this.voyageService.retreive());
                 req.getRequestDispatcher("voyages.jsp").forward(req, resp);
@@ -57,6 +60,21 @@ public class VoyageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         switch (req.getServletPath()) {
+            case "/search" -> {
+                try {
+                    Long depart = Long.parseLong(req.getParameter("depart"));
+                    Long arrivee = Long.parseLong(req.getParameter("arrivee"));
+                    Map<VoyageDTO, LocalTime> voyagesDisponibles = this.voyageService.trouverVoyagesDisponibles(depart, arrivee);
+                    if (voyagesDisponibles.isEmpty())
+                        req.getSession().setAttribute("danger", "Aucun voyages disponible.");
+                    else
+                        req.setAttribute("results", voyagesDisponibles);
+                    req.getRequestDispatcher("index.jsp").forward(req, resp);
+                } catch (StationNotFoundException e) {
+                    req.getSession().setAttribute("danger", e.getMessage());
+                    resp.sendRedirect(req.getContextPath() + "/");
+                }
+            }
             case "/saveVoyage" -> {
                 try {
                     if (this.voyageService.create(this.constructVoyageDTO(req)))

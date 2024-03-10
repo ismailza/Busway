@@ -4,7 +4,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import ma.fstm.ilisi.busway.bo.*;
+import ma.fstm.ilisi.busway.dto.StationDTO;
+import ma.fstm.ilisi.busway.dto.VoyageDTO;
+import ma.fstm.ilisi.busway.exception.StationNotFoundException;
 import ma.fstm.ilisi.busway.service.BusService;
 import ma.fstm.ilisi.busway.service.StationService;
 import ma.fstm.ilisi.busway.service.VoyageService;
@@ -53,12 +55,17 @@ public class BuswayController extends HttpServlet {
             case "/search" -> {
                 String depart = req.getParameter("depart");
                 String arrivee = req.getParameter("arrivee");
-                List<Voyage> voyagesDisponibles = this.consulterVoyagesDisponibles(depart, arrivee);
-                if (voyagesDisponibles == null)
-                    req.setAttribute("danger", "Une ou plusieurs stations spécifiées sont introuvables.");
-                else
-                    req.setAttribute("results", voyagesDisponibles);
-                req.getRequestDispatcher("availableBus.jsp").forward(req, resp);
+                try {
+                    Map<VoyageDTO, LocalTime> voyagesDisponibles = this.consulterVoyagesDisponibles(Long.parseLong(depart), Long.parseLong(arrivee));
+                    if (voyagesDisponibles == null)
+                        req.setAttribute("danger", "Une ou plusieurs stations spécifiées sont introuvables.");
+                    else
+                        req.setAttribute("results", voyagesDisponibles);
+                    req.getRequestDispatcher("availableBus.jsp").forward(req, resp);
+                } catch (StationNotFoundException e) {
+                    req.getSession().setAttribute("danger", e.getMessage());
+                    resp.sendRedirect(req.getContextPath() + "/search");
+                }
             }
             case "/install" -> {
                 try {
@@ -97,12 +104,12 @@ public class BuswayController extends HttpServlet {
      * @param depart La station de départ
      * @param arrivee La station d'arrivée
      */
-    public List<Voyage> consulterVoyagesDisponibles(String depart, String arrivee) {
-        Station stationDepart = this.stationService.findByName(depart);
-        Station stationArrivee = this.stationService.findByName(arrivee);
+    public Map<VoyageDTO, LocalTime> consulterVoyagesDisponibles(Long depart, Long arrivee) throws StationNotFoundException {
+        StationDTO stationDepart = this.stationService.findById(depart);
+        StationDTO stationArrivee = this.stationService.findById(arrivee);
         if (stationDepart == null || stationArrivee == null)
             return null;
-        return this.voyageService.trouverVoyagesDisponibles(stationDepart, stationArrivee);
+        return this.voyageService.trouverVoyagesDisponibles(depart, arrivee);
     }
 
     /**
@@ -122,28 +129,21 @@ public class BuswayController extends HttpServlet {
                                      String prenomConducteur, String nomConducteur,
                                      LocalTime heureDepart, LocalTime heureArrivee,
                                      String depart, String arrivee, Map<String, LocalTime> arretes) {
-        Station stationDepart = this.stationService.findByName(depart);
-        Station stationArrivee = this.stationService.findByName(arrivee);
-        if (stationDepart == null || stationArrivee == null)
-            return;
-        Bus bus = new Bus(numBus, placesLimite, new Conducteur(prenomConducteur, nomConducteur));
-        this.busService.create(bus);
-        Voyage voyage = new Voyage(tarif, bus, heureDepart, heureArrivee, stationDepart, stationArrivee);
-        for (Map.Entry<String, LocalTime> entry : arretes.entrySet()) {
-            Station stationArrete = this.stationService.findByName(entry.getKey());
-            if (stationArrete != null) {
-                voyage.addArrete(new Arrete(stationArrete, entry.getValue()));
-            }
-        }
-        this.voyageService.create(voyage);
+        // TODO implement this method
     }
 
     private void setupSomeTrips() {
-        Map<String, LocalTime> arretes = new HashMap<>();
-        arretes.put("Station 2", LocalTime.of(7,15));
-        arretes.put("Station 3", LocalTime.of(7, 30));
-        arretes.put("Station 4", LocalTime.of(7, 45));
-        this.installerInfosBusway(1, 80, 6, "Ismail", "ZAHIR", LocalTime.of(7,0), LocalTime.of(8,0), "Station 1", "Station 5", arretes);
+        Map<String, LocalTime> arretes1 = new HashMap<>();
+        arretes1.put("Station 2", LocalTime.of(7,15));
+        arretes1.put("Station 3", LocalTime.of(7, 30));
+        arretes1.put("Station 4", LocalTime.of(7, 45));
+        this.installerInfosBusway(1, 80, 6, "Ismail", "ZAHIR", LocalTime.of(7,0), LocalTime.of(8,0), "Station 1", "Station 5", arretes1);
+
+        Map<String, LocalTime> arretes2 = new HashMap<>();
+        arretes1.put("Station 2", LocalTime.of(17,15));
+        arretes1.put("Station 3", LocalTime.of(17, 30));
+        arretes1.put("Station 4", LocalTime.of(17, 45));
+        this.installerInfosBusway(1, 80, 6, "Ismail", "ZAHIR", LocalTime.of(17,0), LocalTime.of(18,0), "Station 1", "Station 5", arretes1);
     }
 
 }

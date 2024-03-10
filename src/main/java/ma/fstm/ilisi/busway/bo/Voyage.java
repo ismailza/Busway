@@ -31,7 +31,7 @@ public class Voyage {
     @ManyToOne
     @JoinColumn(name = "bus_id")
     private Bus bus;
-    @OneToMany(mappedBy = "voyage")
+    @OneToMany(mappedBy = "voyage", fetch = FetchType.EAGER)
     private Set<Reservation> reservations;
 
     public Voyage() {
@@ -153,14 +153,14 @@ public class Voyage {
      * @param stationArrivee La station d'arrivee de passager
      * @return true si le voyage est disponible, false sinon
      */
-    public boolean estDisponible(Station stationDepart, Station stationArrivee) {
+    public LocalTime estDisponible(Station stationDepart, Station stationArrivee) {
         LocalTime heureDepart = null;
 
-        if (this.depart.equals(stationDepart)) {
+        if (this.depart.getId().equals(stationDepart.getId())) {
             heureDepart = this.heureDepart;
         } else {
             for (Arrete arrete : arretes) {
-                if (arrete.getStation().equals(stationDepart)) {
+                if (arrete.getStation().getId().equals(stationDepart.getId())) {
                     heureDepart = arrete.getHeureArrete();
                     break;
                 }
@@ -168,16 +168,22 @@ public class Voyage {
         }
         // If departure station is not found or its departure time is before current time
         if (heureDepart == null || LocalTime.now().isAfter(heureDepart))
-            return false;
+            return null;
         // Check if the arrival station is reachable after the departure
-        if (this.arrivee.equals(stationArrivee))
-            return this.getNombreReservations(stationDepart, stationArrivee) < this.bus.getPlacesLimite();
-        for (Arrete arrete : arretes) {
-            if (arrete.getStation().equals(stationArrivee))
-                return arrete.getHeureArrete().isAfter(heureDepart) &&
-                        this.getNombreReservations(stationDepart, stationArrivee) < this.bus.getPlacesLimite();
+        if (this.arrivee.getId().equals(stationArrivee.getId())) {
+            if (this.getNombreReservations(stationDepart, stationArrivee) < this.bus.getPlacesLimite())
+                return heureDepart;
+            return null;
         }
-        return false;
+        for (Arrete arrete : arretes) {
+            if (arrete.getStation().getId().equals(stationArrivee.getId())) {
+                if (arrete.getHeureArrete().isAfter(heureDepart) &&
+                        this.getNombreReservations(stationDepart, stationArrivee) < this.bus.getPlacesLimite())
+                    return heureDepart;
+                return null;
+            }
+        }
+        return null;
     }
 
     private int getNombreReservations(Station depart, Station arrivee) {
@@ -193,15 +199,15 @@ public class Voyage {
     }
 
     private int getIndexOfStation(Station station) {
-        if (depart.equals(station))
+        if (depart.getId().equals(station.getId()))
             return 0;
         int index = 1;
         for (Arrete arrete : arretes) {
-            if (arrete.getStation().equals(station))
+            if (arrete.getStation().getId().equals(station.getId()))
                 return index;
             index++;
         }
-        if (arrivee.equals(station))
+        if (arrivee.getId().equals(station.getId()))
             return index;
         return -1;
     }

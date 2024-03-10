@@ -5,13 +5,12 @@
          version="5.0">
 
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>/</welcome-file>
     </welcome-file-list>
 
     <servlet-mapping>
         <servlet-name>BusController</servlet-name>
         <url-pattern>/install</url-pattern>
-        <url-pattern>/search</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -62,6 +61,8 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>VoyageController</servlet-name>
+        <url-pattern>/</url-pattern>
+        <url-pattern>/search</url-pattern>
         <url-pattern>/voyages</url-pattern>
         <url-pattern>/newVoyage</url-pattern>
         <url-pattern>/editVoyage</url-pattern>

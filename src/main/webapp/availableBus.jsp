@@ -50,6 +50,7 @@
                                 ---> <br>
                                 <h6>Bus n°${result.bus.numBus}</h6>
                                 <h6>${result.tarif} DH</h6>
+                                <button type="button" class="btn btn-primary btn-sm">Reserver</button>
                             </div>
                             <div class="col-md-3">
                                 <h5>${result.arrivee.nom} - ${result.heureArrivee}</h5>
