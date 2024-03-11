@@ -1,12 +1,17 @@
 package ma.fstm.ilisi.busway.service;
 
 import ma.fstm.ilisi.busway.bo.Reservation;
+import ma.fstm.ilisi.busway.dao.ReservationDAO;
 import ma.fstm.ilisi.busway.dto.ReservationDTO;
-import ma.fstm.ilisi.busway.dto.StationDTO;
 
 import java.util.List;
 
 public class ReservationService implements ReservationServiceInterface {
+    private ReservationDAO reservationDAO;
+
+    public ReservationService() {
+        this.reservationDAO = new ReservationDAO();
+    }
 
     @Override
     public List<ReservationDTO> retreive() {
@@ -15,7 +20,7 @@ public class ReservationService implements ReservationServiceInterface {
 
     @Override
     public boolean create(ReservationDTO reservationDTO) {
-        return false;
+        return this.reservationDAO.create(this.mapToReservation(reservationDTO));
     }
 
     @Override
@@ -30,7 +35,14 @@ public class ReservationService implements ReservationServiceInterface {
 
     @Override
     public Reservation mapToReservation(ReservationDTO reservationDTO) {
-        return null;
+        Reservation reservation = new Reservation();
+        reservation.setId(reservationDTO.getId());
+        reservation.setDate(reservationDTO.getDate());
+        reservation.setVoyage(new VoyageService().mapToVoyage(reservationDTO.getVoyage()));
+        reservation.setPassager(new PassagerService().mapToPassager(reservationDTO.getPassager()));
+        reservation.setDepart(new StationService().mapToStation(reservationDTO.getDepart()));
+        reservation.setArrivee(new StationService().mapToStation(reservationDTO.getArrivee()));
+        return reservation;
     }
 
     @Override

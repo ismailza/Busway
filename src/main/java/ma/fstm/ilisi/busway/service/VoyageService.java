@@ -3,9 +3,7 @@ package ma.fstm.ilisi.busway.service;
 import ma.fstm.ilisi.busway.bo.Arrete;
 import ma.fstm.ilisi.busway.bo.Voyage;
 import ma.fstm.ilisi.busway.dao.VoyageDAO;
-import ma.fstm.ilisi.busway.dto.ArreteDTO;
-import ma.fstm.ilisi.busway.dto.StationDTO;
-import ma.fstm.ilisi.busway.dto.VoyageDTO;
+import ma.fstm.ilisi.busway.dto.*;
 import ma.fstm.ilisi.busway.exception.StationNotFoundException;
 import ma.fstm.ilisi.busway.exception.VoyageNotFoundException;
 
@@ -109,5 +107,21 @@ public class VoyageService implements VoyageServiceInterface {
                 voyages.put(voyageDTO, departTime);
         }
         return voyages;
+    }
+
+    public ReservationDTO reserverVoyage(Long id, Long depart_id, Long arrivee_id, PassagerDTO passagerDTO) throws VoyageNotFoundException, StationNotFoundException {
+        VoyageDTO voyageDTO = this.findById(id);
+        if (voyageDTO == null)
+            throw new VoyageNotFoundException("Voyage not found!");
+        StationDTO stationDepart = new StationService().findById(depart_id);
+        StationDTO stationArrivee = new StationService().findById(arrivee_id);
+        ReservationDTO reservationDTO = new ReservationDTO();
+        reservationDTO.setVoyage(voyageDTO);
+        reservationDTO.setPassager(passagerDTO);
+        reservationDTO.setDepart(stationDepart);
+        reservationDTO.setArrivee(stationArrivee);
+        if (new ReservationService().create(reservationDTO))
+            return reservationDTO;
+        return null;
     }
 }

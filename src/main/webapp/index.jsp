@@ -8,7 +8,11 @@
 </head>
 <body>
     <header>
-
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/">Busway</a>
+            </div>
+        </nav>
     </header>
     <div class="container mt-5">
         <h2 class="text-center mb-4">Trouvez votre voyage ici</h2>
@@ -64,7 +68,12 @@
                                 <h4>Departure <span class="text-danger">${entry.value}</span></h4>
                                 <h6>Bus n°${entry.key.bus.numBus}</h6>
                                 <h6>${entry.key.tarif} DH</h6>
-                                <button type="button" class="btn btn-primary btn-sm">Reserver</button>
+                                <form action="${pageContext.request.contextPath}/reserve" method="post" >
+                                    <input type="hidden" name="id" value="${entry.key.id}">
+                                    <input type="hidden" name="depart_id" value="<%= request.getParameter("depart") %>">
+                                    <input type="hidden" name="arrivee_id" value="<%= request.getParameter("arrivee") %>">
+                                    <button type="submit" class="btn btn-primary btn-sm">Reserver</button>
+                                </form>
                             </div>
                             <div class="col-md-3">
                                 <h5>${entry.key.arrivee.nom} - ${entry.key.heureArrivee}</h5>

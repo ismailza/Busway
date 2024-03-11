@@ -63,6 +63,7 @@
         <servlet-name>VoyageController</servlet-name>
         <url-pattern>/</url-pattern>
         <url-pattern>/search</url-pattern>
+        <url-pattern>/reserve</url-pattern>
         <url-pattern>/voyages</url-pattern>
         <url-pattern>/newVoyage</url-pattern>
         <url-pattern>/editVoyage</url-pattern>

@@ -37,8 +37,8 @@
         <c:forEach items="${conducteurs}" var="conducteur">
             <tr>
                 <td>${conducteur.id}</td>
-                <td>${conducteur.prenom}</td>
                 <td>${conducteur.nom}</td>
+                <td>${conducteur.prenom}</td>
                 <td class="col-2 text-end">
                     <a href="${pageContext.request.contextPath}/editConducteur?id=${conducteur.id}" class="btn btn-sm btn-warning">Modifier</a>
                     <form action="${pageContext.request.contextPath}/deleteConducteur" method="post" style="display:inline;">
