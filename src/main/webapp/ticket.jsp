@@ -43,13 +43,34 @@
 
     <div class="row mt-4 d-flex justify-content-center">
         <div class="card" style="width: 18rem;">
-            <img src="data:image/png;base64,${sessionScope.ticket.qrCodeData}" class="card-img-top" alt="Ticket QR Code">
+            <img id="qrCodeImage" src="data:image/png;base64,${sessionScope.ticket.qrCodeData}" class="card-img-top" alt="Ticket QR Code">
             <div class="card-body">
                 <p class="card-text">Scannez ce QR Code à l'entrée du bus. Conservez-le pour toute la durée de votre voyage.</p>
+                <a href="#" class="btn btn-primary" onclick="downloadQRCode()">Télécharger le Ticket</a>
             </div>
         </div>
     </div>
+
 </div>
+
+<script>
+    function downloadQRCode() {
+        var imageData = document.getElementById('qrCodeImage').src;
+        var byteString = atob(imageData.split(',')[1]);
+        var mimeType = "image/png"; // Ou "image/jpeg"
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        var blob = new Blob([ab], {type: mimeType});
+
+        var link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = "Ticket-QRCode.png";
+        link.click();
+    }
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
