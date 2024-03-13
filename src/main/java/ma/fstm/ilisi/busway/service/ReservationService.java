@@ -42,6 +42,7 @@ public class ReservationService implements ReservationServiceInterface {
         reservation.setPassager(new PassagerService().mapToPassager(reservationDTO.getPassager()));
         reservation.setDepart(new StationService().mapToStation(reservationDTO.getDepart()));
         reservation.setArrivee(new StationService().mapToStation(reservationDTO.getArrivee()));
+        reservation.setQrCodeData(reservationDTO.getQrCodeData());
         return reservation;
     }
 
@@ -52,7 +53,8 @@ public class ReservationService implements ReservationServiceInterface {
         reservationDTO.setDate(reservation.getDate());
         reservationDTO.setDepart(new StationService().mapToStationDTO(reservation.getDepart()));
         reservationDTO.setArrivee(new StationService().mapToStationDTO(reservation.getArrivee()));
-        // Set passenger
+        reservationDTO.setQrCodeData(reservation.getQrCodeData());
+        reservationDTO.setPassager(new PassagerService().mapToPassagerDTO(reservation.getPassager()));
         return reservationDTO;
     }
 }

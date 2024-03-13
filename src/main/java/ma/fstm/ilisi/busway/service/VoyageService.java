@@ -1,5 +1,10 @@
 package ma.fstm.ilisi.busway.service;
 
+import com.google.gson.Gson;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import ma.fstm.ilisi.busway.bo.Arrete;
 import ma.fstm.ilisi.busway.bo.Voyage;
 import ma.fstm.ilisi.busway.dao.VoyageDAO;
@@ -7,11 +12,9 @@ import ma.fstm.ilisi.busway.dto.*;
 import ma.fstm.ilisi.busway.exception.StationNotFoundException;
 import ma.fstm.ilisi.busway.exception.VoyageNotFoundException;
 
+import java.io.ByteArrayOutputStream;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class VoyageService implements VoyageServiceInterface {
@@ -120,8 +123,29 @@ public class VoyageService implements VoyageServiceInterface {
         reservationDTO.setPassager(passagerDTO);
         reservationDTO.setDepart(stationDepart);
         reservationDTO.setArrivee(stationArrivee);
+        reservationDTO.setQrCodeData(this.createQRCode(reservationDTO));
         if (new ReservationService().create(reservationDTO))
             return reservationDTO;
         return null;
+    }
+
+    public String createQRCode(ReservationDTO reservation) {
+        try {
+            Gson gson = new Gson();
+            HashMap<String, String> dataMap = new HashMap<>();
+            dataMap.put("Reservation", reservation.toString());
+            String qrCodeData = gson.toJson(dataMap);
+
+            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+            BitMatrix bitMatrix = qrCodeWriter.encode(qrCodeData, BarcodeFormat.QR_CODE, 80, 80);
+            ByteArrayOutputStream pngOutputStream = new ByteArrayOutputStream();
+            MatrixToImageWriter.writeToStream(bitMatrix, "PNG", pngOutputStream);
+            byte[] qrCodeImageBytes = pngOutputStream.toByteArray();
+
+            return Base64.getEncoder().encodeToString(qrCodeImageBytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

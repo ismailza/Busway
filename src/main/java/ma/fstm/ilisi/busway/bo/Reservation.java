@@ -23,6 +23,8 @@ public class Reservation {
 	@ManyToOne
 	@JoinColumn(name = "arrivee_id")
 	private Station arrivee;
+	@Column(length = 1024)
+	private String qrCodeData;
 
 	public Reservation() {
 		this.date = LocalDateTime.now();
@@ -40,6 +42,11 @@ public class Reservation {
 	public Reservation(Long id, LocalDateTime date, Voyage voyage, Passager passager, Station depart, Station arrivee) {
 		this(date, voyage, passager, depart, arrivee);
 		this.id = id;
+	}
+
+	public Reservation(Long id, LocalDateTime date, Voyage voyage, Passager passager, Station depart, Station arrivee, String qrCodeData) {
+		this(id, date, voyage, passager, depart, arrivee);
+		this.qrCodeData = qrCodeData;
 	}
 
 	public Long getId() {
@@ -89,4 +96,13 @@ public class Reservation {
 	public void setArrivee(Station arrivee) {
 		this.arrivee = arrivee;
 	}
+
+	public String getQrCodeData() {
+		return qrCodeData;
+	}
+
+	public void setQrCodeData(String qrCodeData) {
+		this.qrCodeData = qrCodeData;
+	}
+
 }

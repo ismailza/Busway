@@ -20,6 +20,5 @@
         <mapping class="ma.fstm.ilisi.busway.bo.Arrete" />
         <mapping class="ma.fstm.ilisi.busway.bo.Voyage" />
         <mapping class="ma.fstm.ilisi.busway.bo.Reservation" />
-
     </session-factory>
 </hibernate-configuration>

@@ -42,10 +42,23 @@
     </c:if>
 
     <div class="row mt-4 d-flex justify-content-center">
-        <div class="card" style="width: 18rem;">
-            <img id="qrCodeImage" src="data:image/png;base64,${sessionScope.ticket.qrCodeData}" class="card-img-top" alt="Ticket QR Code">
+        <div class="card mb-3">
+            <div class="card-header">
+                Informations de la Réservation
+            </div>
             <div class="card-body">
-                <p class="card-text">Scannez ce QR Code à l'entrée du bus. Conservez-le pour toute la durée de votre voyage.</p>
+                <h5 class="card-title">Date : ${sessionScope.reservation.date}</h5>
+                <p class="card-text">Voyage n° ${sessionScope.reservation.voyage.id} :${sessionScope.reservation.voyage.depart} -> ${sessionScope.reservation.voyage.arrivee} </p>
+                <p class="card-text">Départ: ${sessionScope.reservation.depart.nom}</p>
+                <p class="card-text">Arrivée: ${sessionScope.reservation.arrivee.nom}</p>
+                <p class="card-text">Tarif: ${sessionScope.reservation.voyage.tarif}</p>
+                <p class="card-text">Passager: ${sessionScope.reservation.passager}</p>
+
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img id="qrCodeImage" src="data:image/png;base64,${sessionScope.reservation.qrCodeData}" class="card-img-top" alt="Ticket QR Code">
+            <div class="card-body">
                 <a href="#" class="btn btn-primary" onclick="downloadQRCode()">Télécharger le Ticket</a>
             </div>
         </div>

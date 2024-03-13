@@ -4,7 +4,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import ma.fstm.ilisi.busway.bo.Ticket;
 import ma.fstm.ilisi.busway.dto.ArreteDTO;
 import ma.fstm.ilisi.busway.dto.PassagerDTO;
 import ma.fstm.ilisi.busway.dto.ReservationDTO;
@@ -14,7 +13,6 @@ import ma.fstm.ilisi.busway.exception.StationNotFoundException;
 import ma.fstm.ilisi.busway.exception.VoyageNotFoundException;
 import ma.fstm.ilisi.busway.service.BusService;
 import ma.fstm.ilisi.busway.service.StationService;
-import ma.fstm.ilisi.busway.service.TicketService;
 import ma.fstm.ilisi.busway.service.VoyageService;
 
 import java.io.IOException;
@@ -89,8 +87,7 @@ public class VoyageController extends HttpServlet {
                     passagerDTO.setId(1L);
                     ReservationDTO reservationDTO = this.voyageService.reserverVoyage(id, depart_id, arrivee_id, passagerDTO);
                     if (reservationDTO != null) {
-                        Ticket ticket = new TicketService().createTicket(reservationDTO);
-                        req.getSession().setAttribute("ticket", ticket);
+                        req.getSession().setAttribute("reservation", reservationDTO);
                         req.getSession().setAttribute("success", "Reservation effectuée avec succès");
                         req.getRequestDispatcher("ticket.jsp").forward(req, resp);
                     } else {
