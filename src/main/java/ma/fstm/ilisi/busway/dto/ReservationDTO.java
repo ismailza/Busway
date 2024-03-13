@@ -9,6 +9,7 @@ public class ReservationDTO {
     private PassagerDTO passager;
     private StationDTO depart;
     private StationDTO arrivee;
+    private String qrCodeData;
 
     public ReservationDTO() {
         this.date = LocalDateTime.now();
@@ -76,4 +77,23 @@ public class ReservationDTO {
         this.arrivee = arrivee;
     }
 
+    public String getQrCodeData() {
+        return qrCodeData;
+    }
+
+    public void setQrCodeData(String qrCodeData) {
+        this.qrCodeData = qrCodeData;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", date=" + date +
+                ", voyage=" + voyage +
+                ", passager=" + passager +
+                ", depart=" + depart +
+                ", arrivee=" + arrivee +
+                '}';
+    }
 }

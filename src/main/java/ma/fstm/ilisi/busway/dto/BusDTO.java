@@ -79,4 +79,11 @@ public class BusDTO {
     public void addVoyage(VoyageDTO voyage) {
         this.voyages.add(voyage);
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "numBus=" + numBus +
+                '}';
+    }
 }

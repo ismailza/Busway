@@ -94,4 +94,8 @@ public class StationDTO {
         this.reservationsArrivee.add(reservation);
     }
 
+    @Override
+    public String toString() {
+        return "Station " + nom;
+    }
 }

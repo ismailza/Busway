@@ -129,4 +129,18 @@ public class VoyageDTO {
     public void addReservation(ReservationDTO reservation) {
         this.reservations.add(reservation);
     }
+
+    @Override
+    public String toString() {
+        return "VoyageDTO{" +
+                "id=" + id +
+                ", tarif=" + tarif +
+                ", heureDepart=" + heureDepart +
+                ", heureArrivee=" + heureArrivee +
+                ", depart=" + depart +
+                ", arrivee=" + arrivee +
+                ", arretes=" + arretes +
+                ", bus=" + bus +
+                '}';
+    }
 }

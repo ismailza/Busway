@@ -60,4 +60,12 @@ public class ArreteDTO {
     public void addVoyage(VoyageDTO voyage) {
         this.voyages.add(voyage);
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "station=" + station +
+                ", heureArrete=" + heureArrete +
+                '}';
+    }
 }

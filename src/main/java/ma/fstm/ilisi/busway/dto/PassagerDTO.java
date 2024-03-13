@@ -69,4 +69,9 @@ public class PassagerDTO {
     public void addReservation(ReservationDTO reservation) {
         this.reservations.add(reservation);
     }
+
+    @Override
+    public String toString() {
+        return nom.toUpperCase() + " " + prenom;
+    }
 }

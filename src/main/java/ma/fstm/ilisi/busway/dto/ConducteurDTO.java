@@ -59,4 +59,13 @@ public class ConducteurDTO {
     public void addBus(BusDTO bus) {
         this.buses.add(bus);
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", prenom='" + prenom + '\'' +
+                ", nom='" + nom + '\'' +
+                '}';
+    }
 }
