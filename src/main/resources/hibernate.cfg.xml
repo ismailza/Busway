@@ -5,8 +5,7 @@
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/busway?createDatabaseIfNotExist=true&amp;serverTimezone=UTC</property>
-        <property name="connection.username">ismail</property>
-        <property name="connection.password">1234</property>
+        <property name="connection.username">root</property>
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <!-- Update the database schema on startup -->

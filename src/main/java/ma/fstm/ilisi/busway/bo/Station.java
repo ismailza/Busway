@@ -12,6 +12,9 @@ public class Station {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
+
+    private Double longitude;
+    private Double latitude;
     @OneToMany(mappedBy = "depart")
     private List<Reservation> reservationsDepart;
     @OneToMany(mappedBy = "arrivee")
@@ -40,7 +43,28 @@ public class Station {
         this(nom);
         this.id = id;
     }
+    public Station(Long id, String nom,double latitude,double longitude) {
+        this(id,nom);
+        this.latitude=latitude;
+        this.longitude=longitude;
+    }
+    public double getLatitude() {
+        return latitude;
 
+    };
+    public void setLatitude(double lat) {
+         latitude =lat;
+
+    };
+    public double getLongitude() {
+        return this.longitude;
+
+    };
+
+    public void setLongitude(double lon) {
+         longitude=lon;
+
+    };
     public Long getId() {
         return id;
     }

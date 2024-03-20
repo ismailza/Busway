@@ -96,4 +96,8 @@ public class StationDAO implements StationDAOInterface {
         }
         return null;
     }
+
+
+    //Applying the haversine method
+
 }

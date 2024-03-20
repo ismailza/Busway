@@ -1,11 +1,15 @@
 package ma.fstm.ilisi.busway.dto;
 
+import org.eclipse.tags.shaded.org.apache.bcel.generic.ARETURN;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class StationDTO {
     private Long id;
     private String nom;
+    private Double latitude;
+    private Double longitude;
     private List<ReservationDTO> reservationsDepart;
     private List<ReservationDTO> reservationsArrivee;
     private List<VoyageDTO> voyagesDepart;
@@ -30,6 +34,12 @@ public class StationDTO {
         this.id = id;
     }
 
+    public StationDTO(Long id, String nom, Double lagitude, Double  longitude) {
+        this(id, nom);
+        this.latitude = lagitude;
+        this.longitude = longitude;
+    }
+
     public Long getId() {
         return id;
     }
@@ -41,6 +51,15 @@ public class StationDTO {
     public String getNom() {
         return nom;
     }
+
+    public Double  getLatitude() {
+        return this.latitude;
+
+    };
+    public Double  getLongitude() {
+        return this.longitude;
+
+    };
 
     public List<ReservationDTO> getReservationsDepart() {
         return reservationsDepart;
