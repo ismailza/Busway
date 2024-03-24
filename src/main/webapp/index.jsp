@@ -29,6 +29,9 @@
             <% session.removeAttribute("danger"); %>
         </div>
     </c:if>
+        <div class="row mt-4 d-flex justify-content-right">
+        <button> <a href ="chat.jsp">Reserver Automatiquement</a></button
+         </div>
     <div class="row mt-4 d-flex justify-content-center">
         <form class="needs-validation" method="post" action="${pageContext.request.contextPath}/search" style="max-width: 800px;">
             <div class="row g-3">
