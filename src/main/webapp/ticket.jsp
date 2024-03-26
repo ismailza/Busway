@@ -52,8 +52,7 @@
                 <p class="card-text">Départ: ${sessionScope.reservation.depart.nom}</p>
                 <p class="card-text">Arrivée: ${sessionScope.reservation.arrivee.nom}</p>
                 <p class="card-text">Tarif: ${sessionScope.reservation.voyage.tarif}</p>
-                <p class="card-text">Passager: ${sessionScope.reservation.passager}</p>
-
+<%--                <p class="card-text">Passager: ${sessionScope.reservation.passager}</p>--%>
             </div>
         </div>
         <div class="card" style="width: 18rem;">

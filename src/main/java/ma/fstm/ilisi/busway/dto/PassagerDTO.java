@@ -72,6 +72,6 @@ public class PassagerDTO {
 
     @Override
     public String toString() {
-        return nom.toUpperCase() + " " + prenom;
+        return nom + " " + prenom;
     }
 }

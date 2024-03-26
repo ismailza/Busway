@@ -11,9 +11,9 @@
 
 </header>
 <div class="container">
-    <h1 class="mt-4">
+    <div class="mt-4">
         <h1 class="mt-4">${voyage != null && voyage.id != null ? "Modifier le voyage" : "Ajouter un voyage"}</h1>
-    </h1>
+    </div>
     <div class="row mt-4 d-flex justify-content-center">
         <div class="col-md-6">
             <form action="${voyage != null && voyage.id != null ? 'updateVoyage' : 'saveVoyage'}" method="post" class="form-horizontal">

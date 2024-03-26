@@ -66,17 +66,16 @@ public class VoyageController extends HttpServlet {
             case "/search" -> {
                 try {
                     req.setAttribute("stations", new StationService().retreive());
-// Retrieve latitude and longitude parameters from request
+                    // Retrieve latitude and longitude parameters from request
                     String latitudeParam = req.getParameter("latitude");
                     String longitudeParam = req.getParameter("longitude");
 
-//                 Convert latitude and longitude parameters to Double and call switchCoordinates method
+                    // Convert latitude and longitude parameters to Double and call switchCoordinates method
                     Double latitude = Double.parseDouble(latitudeParam);
                     Double longitude = Double.parseDouble(longitudeParam);
                     Long stationDepart = new StationService().switchCoordinates(latitude, longitude);
 
                    // Long depart = Long.parseLong(req.getParameter("depart"));
-
                     Long arrivee = Long.parseLong(req.getParameter("arrivee"));
                     Map<VoyageDTO, LocalTime> voyagesDisponibles = this.voyageService.trouverVoyagesDisponibles(stationDepart , arrivee);
                     if (voyagesDisponibles.isEmpty()) {
@@ -91,11 +90,6 @@ public class VoyageController extends HttpServlet {
                     resp.sendRedirect(req.getContextPath() + "/");
                 }
             }
-
-
-
-
-
             case "/reserve" -> {
                 try {
                     Long id = Long.valueOf(req.getParameter("id"));

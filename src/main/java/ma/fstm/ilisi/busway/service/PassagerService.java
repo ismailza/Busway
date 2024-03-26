@@ -33,7 +33,7 @@ public class PassagerService implements PassagerServiceInterface {
         passagerDTO.setId(passager.getId());
         passagerDTO.setPrenom(passager.getPrenom());
         passagerDTO.setNom(passager.getNom());
-        passagerDTO.setReservations(passager.getReservations().stream().map(reservation -> new ReservationService().mapToReservationDTO(reservation)).collect(Collectors.toSet()));
+        // passagerDTO.setReservations(passager.getReservations().stream().map(reservation -> new ReservationService().mapToReservationDTO(reservation)).collect(Collectors.toSet()));
         return passagerDTO;
     }
 
