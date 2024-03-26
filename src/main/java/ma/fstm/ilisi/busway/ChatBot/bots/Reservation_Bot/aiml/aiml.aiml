@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+
+  <category>
+    <pattern>Bonjour</pattern>
+    <template>Bonjour! Comment puis je vous aidez?</template>
+  </category>
+
+  <category>
+    <pattern>reserver un voyage</pattern>
+    <template>Voici les stations disponibles :  </template>
+    <template> Station1 , Station2  </template>
+  </category>
+
+</aiml>
